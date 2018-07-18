@@ -5,11 +5,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "io.condorlabs.lgoyes.demoretrofit"
-        minSdkVersion 15
-        targetSdkVersion 28
+        minSdkVersion rootProject.ext.minSDKVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -24,17 +24,24 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    testImplementation 'junit:junit:4.12'
-
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support.constraint:constraint-layout:${rootProject.ext.constraintLayoutVersion}"
+    testImplementation "junit:junit:${rootProject.ext.junitVersion}"
 
     // Retrofit
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation "com.google.code.gson:gson:${rootProject.ext.gsonVersion}"
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofitVersion}"
 
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    // Dagger 2
+    implementation "com.google.dagger:dagger:${rootProject.ext.dagger2Version}"
+    kapt "com.google.dagger:dagger-compiler:${rootProject.ext.dagger2Version}"
+
+    // Rx
+    implementation "io.reactivex.rxjava2:rxjava:${rootProject.ext.rxJava2Version}"
+    implementation "io.reactivex.rxjava2:rxandroid:${rootProject.ext.rxAndroidVersion}"
+
+    androidTestImplementation "com.android.support.test:runner:${rootProject.ext.testRunnerVersion}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${rootProject.ext.testEspressoVersion}"
 }
